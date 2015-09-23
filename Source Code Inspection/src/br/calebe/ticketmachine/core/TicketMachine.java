@@ -5,7 +5,7 @@ import br.calebe.ticketmachine.exception.SaldoInsuficienteException;
 import java.util.Iterator;
 
 /**
- *
+ * edit by Leticia Lopes
  * @author Calebe de Paula Bianchini
  */
 public class TicketMachine {
@@ -22,14 +22,15 @@ public class TicketMachine {
     public void inserir(int quantia) throws PapelMoedaInvalidaException {
         boolean achou = false;
         for (int i = 0; i < papelMoeda.length && !achou; i++) {
-            if (papelMoeda[1] == quantia) {
+            if (papelMoeda[i] == quantia) { //*
                 achou = true;
             }
         }
         if (!achou) {
             throw new PapelMoedaInvalidaException();
         }
-        this.saldo += quantia;
+        else{ //*
+        this.saldo += quantia; }
     }
 
     public int getSaldo() {
@@ -37,16 +38,26 @@ public class TicketMachine {
     }
 
     public Iterator<Integer> getTroco() {
-        return null;
+        return Troco(valor - saldo); //*
     }
 
     public String imprimir() throws SaldoInsuficienteException {
+        String result = "Falha";
+        
         if (saldo < valor) {
             throw new SaldoInsuficienteException();
         }
-        String result = "*****************\n";
+        
+        else{ //*
+        result = "*****************\n";
         result += "*** R$ " + saldo + ",00 ****\n";
         result += "*****************\n";
+        }
         return result;
     }
+
+    private Iterator<Integer> Troco(int i) {
+        return Troco(valor - saldo); //*
+        }
 }
+ 
